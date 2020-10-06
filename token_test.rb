@@ -18,8 +18,8 @@ def main
   #                         })
 
 
-  if response.code != 200 || response.message != "OK"
-    puts "There was a problem!"
+  if response.code != 200 || response.message != 'OK'
+    puts 'There was a problem!'
     puts "The code was #{response.code} and the message was #{response.message}"
   end
 
