@@ -6,4 +6,11 @@ class User < Recipient
     super(slack_id, name)
   end
 
+  def details
+
+  end
+
+  def self.list_all
+
+  end
 end

@@ -6,4 +6,16 @@ class Channel < Recipient
     super(slack_id, name)
   end
 
+  def details
+
+  end
+
+  def self.list_all
+    # response['channels'].each do |channel|
+    #   puts channel['name']
+    end
+
+  end
+
+
 end

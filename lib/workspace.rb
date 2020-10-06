@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SlackApiError < StandardError
 end
 
@@ -8,5 +10,7 @@ class Workspace
     @users = []
     @channels = []
   end
+
+
 
 end
