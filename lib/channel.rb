@@ -11,9 +11,7 @@ class Channel < Recipient
   end
 
   def self.list_all
-    # response['channels'].each do |channel|
-    #   puts channel['name']
-    end
+   
 
   end
 
