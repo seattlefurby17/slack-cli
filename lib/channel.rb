@@ -11,7 +11,7 @@ class Channel < Recipient
   end
 
   def self.list_all
-   
+
 
   end
 
