@@ -2,5 +2,6 @@
 
 .DS_Store
 
-# Ignore environemnt variables
+# Ignore environment variables
+# This is how you add .env to .gitignore
 .env
