@@ -20,7 +20,7 @@ class Channel < Recipient
     #   puts channel['name']
     # return [channel1, channel2, channel3, channel4]
   end
-
+   
   # @channels = Channel.list_all # returns array of channels # Class method
   # @channels.each do |channel|
   #   puts channel.details # Instance method
