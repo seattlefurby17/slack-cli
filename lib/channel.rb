@@ -1,8 +1,7 @@
-
 class Channel < Recipient
   attr_reader :slack_id, :name, :topic, :member_count
 
-  def initialize(slack_id, name, topic, member_count)
+  def initialize(slack_id:, name:, topic:, member_count:)
     super(slack_id, name)
     @topic = topic
     @member_count = member_count
@@ -16,25 +15,22 @@ class Channel < Recipient
   end
 
   def self.list_all
-<<<<<<< HEAD
+    url = "https://slack.com/api/conversations.list"
+    params = { token: ENV['SLACK_TOKEN'] }
+    response = Channel.get(url, params)
+    channel_list = []
 
-=======
-    # response['channels'].each do |channel|
-    #   puts channel['name']
-    # return [channel1, channel2, channel3, channel4]
-  end
-   
-  # @channels = Channel.list_all # returns array of channels # Class method
-  # @channels.each do |channel|
-  #   puts channel.details # Instance method
-  # end
->>>>>>> d9d56f619a332bd97d46f3ac2856f9436b39e3f6
-
-  def details
-    puts @slack_id
-    puts @name
-    puts @topic
-    puts @member_count
+    response['channels'].each do |channel|
+      topic = channel['topic']['value']
+      topic = 'No topic set' if topic == ''
+      channel_list << Channel.new(
+          slack_id: channel['id'],
+          name: channel['name'],
+          topic: topic,
+          member_count: channel['num_members']
+      )
+    end
+    return channel_list
   end
 
 end
