@@ -17,7 +17,7 @@ class User < Recipient
   end
 
   def self.list_all
-    url = "https://slack.com/api/users.list"
+    url = 'https://slack.com/api/users.list'
     params = { token: ENV['SLACK_TOKEN'] }
     response = Channel.get(url, params)
     user_list = []
@@ -29,11 +29,11 @@ class User < Recipient
       status_emoji = 'No emoji' if status_emoji == ''
 
       user_list << User.new(
-          slack_id: user['id'],
-          name: user['name'],
-          real_name: user['real_name'],
-          status_text: status_text,
-          status_emoji: status_emoji
+        slack_id: user['id'],
+        name: user['name'],
+        real_name: user['real_name'],
+        status_text: status_text,
+        status_emoji: status_emoji
       )
     end
     return user_list
