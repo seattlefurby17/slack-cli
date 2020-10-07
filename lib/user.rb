@@ -8,7 +8,7 @@ class User < Recipient
     @status_emoji = status_emoji
   end
 
-  def details
+  def get_details
     puts "Slack ID: #{slack_id}"
     puts "Name: #{name}"
     puts "Real Name: #{real_name}"

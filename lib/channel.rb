@@ -7,7 +7,7 @@ class Channel < Recipient
     @member_count = member_count
   end
 
-  def details
+  def get_details
     puts "Slack ID: #{slack_id}"
     puts "Name: #{name}"
     puts "Topic: #{topic}"
