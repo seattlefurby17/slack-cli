@@ -3,6 +3,7 @@ require_relative 'recipient'
 require_relative 'channel'
 require_relative 'user'
 
+
 class SlackApiError < StandardError
 end
 
