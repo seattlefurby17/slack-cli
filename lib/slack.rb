@@ -6,20 +6,20 @@ require 'table_print'
 
 def get_command
   puts 'What would you like to do? '
-  puts "1 = list users"
-  puts "2 = list channels"
-  puts "3 = select user"
-  puts "4 = select channel"
-  puts "5 = details"
-  puts "6 = quit/q"
+  puts '1 = list users'
+  puts '2 = list channels'
+  puts '3 = select user'
+  puts '4 = select channel'
+  puts '5 = details'
+  puts '6 = quit/q'
   command = gets.chomp.downcase
   command
 end
 
 def get_object_type
-  puts "Great! Do you want to select by name or ID?"
-  puts "1. Name"
-  puts "2. ID"
+  puts 'Great! Do you want to select by name or ID?'
+  puts '1. Name'
+  puts '2. ID'
   command = gets.chomp.downcase
   loop do
     case command
@@ -28,7 +28,7 @@ def get_object_type
     when '2', 'id'
       return 'id'
     else
-      puts "Please enter a valid choice!"
+      puts 'Please enter a valid choice!'
       command = gets.chomp.downcase
     end
   end
@@ -36,11 +36,12 @@ end
 
 def main
   puts 'Welcome to the Ada Slack CLI!'
-  puts "Buffering..."
+  puts 'Buffering...'
   workspace = Workspace.new
+  puts "We have #{workspace.channels.length} channels and #{workspace.users.length} users."
 
   command = get_command
-  while command != '6' && command != "quit" && command != 'q'
+  while command != '6' && command != 'quit' && command != 'q'
     case command
     when '1', 'list users'
       tp workspace.users, 'slack_id', 'name', 'real_name'
@@ -53,9 +54,9 @@ def main
       puts "Enter the #{type}:"
       input = gets.chomp.downcase
       if workspace.select_user(input, type)
-        puts "User selected!"
+        puts 'User selected!'
       else
-        puts "User not found! Please try again."
+        puts 'User not found! Please try again.'
       end
 
     when '4', 'select channel'
@@ -63,16 +64,16 @@ def main
       puts "Enter the #{type}:"
       input = gets.chomp.downcase
       if workspace.select_channel(input, type)
-        puts "Channel selected!"
+        puts 'Channel selected!'
       else
-        puts "Channel not found! Please try again."
+        puts 'Channel not found! Please try again.'
       end
 
     when '5', 'details'
       if workspace.selected
         puts workspace.selected.get_details
       else
-        puts "No user/channel selected. Select one and try again"
+        puts 'No user/channel selected. Select one and try again'
       end
 
     else
