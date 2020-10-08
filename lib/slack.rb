@@ -26,7 +26,7 @@ def get_object_type
     when '1', 'name'
       return 'name'
     when '2', 'id'
-      return 'id'
+      return 'slack_id'
     else
       puts 'Please enter a valid choice!'
       command = gets.chomp.downcase
@@ -52,7 +52,7 @@ def main
     when '3', 'select user'
       type = get_object_type
       puts "Enter the #{type}:"
-      input = gets.chomp.downcase
+      input = gets.chomp
       if workspace.select_user(input, type)
         puts 'User selected!'
       else
@@ -62,7 +62,7 @@ def main
     when '4', 'select channel'
       type = get_object_type
       puts "Enter the #{type}:"
-      input = gets.chomp.downcase
+      input = gets.chomp
       if workspace.select_channel(input, type)
         puts 'Channel selected!'
       else

@@ -17,14 +17,14 @@ class Workspace
   end
 
   def select_channel(input, type)
-    if type == 'id'
-      channel = channels.find { |channel| channel.slack_id.downcase == input }
+    if type == 'slack_id'
+      channel = channels.find { |channel| channel.slack_id.casecmp?(input) }
       return nil unless channel
 
       @selected = channel
       return channel
     elsif type == 'name'
-      channel = channels.find { |channel| channel.name.downcase == input }
+      channel = channels.find { |channel| channel.name.casecmp?(input) }
       return nil unless channel
 
       @selected = channel
@@ -36,14 +36,14 @@ class Workspace
 
 
   def select_user(input, type)
-    if type == 'id'
-      user = users.find { |user| user.slack_id.downcase == input }
+    if type == 'slack_id'
+      user = users.find { |user| user.slack_id.casecmp?(input) }
       return nil unless user
 
       @selected = user
       return user
     elsif type == 'name'
-      user = users.find { |user| user.name.downcase == input }
+      user = users.find { |user| user.name.casecmp?(input) }
       return nil unless user
 
       @selected = user
