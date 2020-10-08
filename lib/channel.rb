@@ -8,10 +8,7 @@ class Channel < Recipient
   end
 
   def get_details
-    puts "Slack ID: #{slack_id}"
-    puts "Name: #{name}"
-    puts "Topic: #{topic}"
-    puts "Member Count: #{member_count}"
+    return "Slack ID: #{slack_id}\n" + "Name: #{name}\n" + "Topic: #{topic}" + "Member Count: #{member_count}"
   end
 
   def self.list_all
@@ -24,10 +21,10 @@ class Channel < Recipient
       topic = channel['topic']['value']
       topic = 'No topic set' if topic == ''
       channel_list << Channel.new(
-          slack_id: channel['id'],
-          name: channel['name'],
-          topic: topic,
-          member_count: channel['num_members']
+        slack_id: channel['id'],
+        name: channel['name'],
+        topic: topic,
+        member_count: channel['num_members']
       )
     end
     return channel_list

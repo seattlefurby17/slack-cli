@@ -9,17 +9,18 @@ class User < Recipient
   end
 
   def get_details
-    puts "Slack ID: #{slack_id}"
-    puts "Name: #{name}"
-    puts "Real Name: #{real_name}"
-    puts "Status Text: #{status_text}"
-    puts "Status Emoji: #{status_emoji}"
+    return "Slack ID: #{slack_id}\n" + "Name: #{name}\n" + "Real Name: #{real_name}\n" + "Status Text: #{status_text}\n" + "Status Emoji: #{status_emoji}"
   end
 
   def self.list_all
     url = 'https://slack.com/api/users.list'
     params = { token: ENV['SLACK_TOKEN'] }
-    response = Channel.get(url, params)
+    begin
+      response = Channel.get(url, params)
+    rescue SlackApiError => exception
+      puts "Unsuccessful request, #{exception.message}. Please try again"
+      exit
+    end
     user_list = []
 
     response['members'].each do |user|

@@ -13,8 +13,10 @@ class Recipient
   def self.get(url, params)
     response = HTTParty.get(url, query: params)
     sleep(1)
-    if response.code != 200 || response['ok'] != true
+    if response.code != 200
       raise SlackApiError, 'Slack API call failed!'
+    elsif response['ok'] != true
+      raise SlackApiError, "#{response['error']}"
     end
 
     return response
