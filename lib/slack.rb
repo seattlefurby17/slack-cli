@@ -87,7 +87,7 @@ def main
         end
         puts "Message \"#{message}\" sent!" if success
       else
-        puts "Please select a user or channel first"
+        puts 'Please select a user or channel first'
       end
 
     else

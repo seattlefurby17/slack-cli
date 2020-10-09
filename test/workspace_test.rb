@@ -12,8 +12,8 @@ describe 'Workspace class' do
 
   describe 'Workspace initialization' do
     it 'can initialize correctly' do
-      expect(@workspace.channels.length).must_equal 47
-      expect(@workspace.users.length).must_equal 162
+      expect(@workspace.channels.length).must_equal 48
+      expect(@workspace.users.length).must_equal 163
     end
   end
 
@@ -26,10 +26,10 @@ describe 'Workspace class' do
   end
   it 'last channel' do
     last_channel = @workspace.channels.last
-    expect(last_channel.name).must_equal 'testchannel-liroulirou'
+    expect(last_channel.name).must_equal 'test_channel_alice'
     expect(last_channel.topic).must_equal 'No topic set'
-    expect(last_channel.member_count).must_equal 1
-    expect(last_channel.slack_id).must_equal 'C01BXHNFPHT'
+    expect(last_channel.member_count).must_equal 4
+    expect(last_channel.slack_id).must_equal 'C01C8UKJVEW'
   end
   describe 'select_channel method' do
     it 'can find channel by id' do
@@ -64,5 +64,13 @@ describe 'Workspace class' do
       expect { @workspace.select_user('test', 'abc') }.must_raise ArgumentError
     end
   end
-  
+  describe 'send_message method' do
+    it 'can send a message to a channel by name' do
+      VCR.use_cassette('slack_workspace') do
+        @workspace = Workspace.new
+      end
+      @workspace.select_channel('test-channel2', 'name')
+      expect @workspace.send_message('I shot first').must_equal true
+    end
+  end
 end
