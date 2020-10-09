@@ -11,7 +11,8 @@ def get_command
   puts '3 = select user'
   puts '4 = select channel'
   puts '5 = details'
-  puts '6 = quit/q'
+  puts '6 = send message'
+  puts '7 = quit/q'
   command = gets.chomp.downcase
   command
 end
@@ -41,7 +42,7 @@ def main
   puts "We have #{workspace.channels.length} channels and #{workspace.users.length} users."
 
   command = get_command
-  while command != '6' && command != 'quit' && command != 'q'
+  while command != '7' && command != 'quit' && command != 'q'
     case command
     when '1', 'list users'
       tp workspace.users, 'slack_id', 'name', 'real_name'
@@ -74,6 +75,12 @@ def main
         puts workspace.selected.get_details
       else
         puts 'No user/channel selected. Select one and try again'
+      end
+    when '6', 'send message'
+      if workspace.selected
+        puts 'What is  your message?'
+        message = gets.chomp
+        workspace.selected.send_message(message)
       end
 
     else

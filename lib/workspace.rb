@@ -52,4 +52,13 @@ class Workspace
       raise ArgumentError, 'Invalid search criteria'
     end
   end
+
+  def send_message(message)
+    if @selected
+      @selected.send_message(message)
+    else
+      return nil
+    end
+  end
+
 end
