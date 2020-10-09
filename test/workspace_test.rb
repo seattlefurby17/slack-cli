@@ -65,11 +65,55 @@ describe 'Workspace class' do
     end
   end
   describe 'send_message method' do
-    it 'can send a message to a channel by name' do
+    it 'has a send_message method' do
+      expect(@workspace).must_respond_to :send_message
+    end
+
+    it 'can send a message to a selected channel by name' do
       VCR.use_cassette('slack_send_message') do
         @workspace = Workspace.new
-      @workspace.select_channel('test-channel2', 'name')
-      expect @workspace.send_message('I shot first').must_equal true
+        @workspace.select_channel('test-channel2', 'name')
+        expect @workspace.send_message('I shot first').must_equal true
+      end
+    end
+
+    it 'can send message to a selected channel by slack_id' do
+      VCR.use_cassette('slack_send_message') do
+        @workspace = Workspace.new
+        @workspace.select_channel('C01ABK51G14', 'slack_id')
+        expect @workspace.send_message('I shot first').must_equal true
+      end
+    end
+
+    it 'can send a message to a selected user by name' do
+      VCR.use_cassette('slack_send_message') do
+        @workspace = Workspace.new
+        @workspace.select_user('beatress', 'name')
+        expect @workspace.send_message('I shot first').must_equal true
+      end
+    end
+    it 'can send a message to a selected user by slack_id' do
+      VCR.use_cassette('slack_send_message') do
+        @workspace = Workspace.new
+        @workspace.select_user('U017F099ZFX', 'slack_id')
+        expect @workspace.send_message('I shot first').must_equal true
+      end
+    end
+
+    it 'will raise an error if selected channel is invalid' do
+      VCR.use_cassette('slack_send_message') do
+          @workspace = Workspace.new
+        invalid_channel = Channel.new(slack_id: '777', name: 'burger', topic: 'more burger', member_count: 1)
+     
+        expect { invalid_channel.send_message('Invalid channel') }.must_raise SlackApiError
+        end
+    end
+
+    it 'will raise an error if selected user is invalid' do
+      VCR.use_cassette('slack_send_message') do
+        @workspace = Workspace.new
+        invalid_user = User.new(slack_id: '777555', name: 'baby', real_name: 'real baby', status_text: 'crying', status_emoji: ':(')
+        expect { invalid_user.send_message('Invalid user') }.must_raise SlackApiError
       end
     end
   end

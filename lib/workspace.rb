@@ -26,6 +26,7 @@ class Workspace
     end
 
       return nil unless channel
+
       @selected = channel
       return channel
   end
@@ -41,6 +42,7 @@ class Workspace
     end
 
       return nil unless user
+
       @selected = user
       return user
 
