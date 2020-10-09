@@ -8,8 +8,8 @@ class Channel < Recipient
   end
 
   def get_details
-    return "Slack ID: #{slack_id}\n" + "Name: #{name}\n" + "Topic: #{topic}\n"\
-    + "Member Count: #{member_count}"
+    return  "Slack ID: #{slack_id}\n" + "Name: #{name}\n"\
+            "Topic: #{topic}\n" + "Member Count: #{member_count}"
   end
 
   def self.list_all

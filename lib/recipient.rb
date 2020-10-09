@@ -5,11 +5,12 @@ require 'httparty'
 
 Dotenv.load
 
-BASE_URL =	'https://slack.com/api'
+BASE_URL = 'https://slack.com/api'
 API_KEY = ENV['SLACK_TOKEN']
 
 class Recipient
   attr_reader :slack_id, :name
+
   def initialize(slack_id, name)
     @slack_id = slack_id
     @name = name
@@ -17,14 +18,14 @@ class Recipient
 
   def self.get(url, params)
     response = HTTParty.get(url, query: params)
-    sleep(1)
+    sleep(0.5)
     if response.code != 200
       raise SlackApiError, 'Slack API call failed!'
     elsif response['ok'] != true
       raise SlackApiError, (response['error']).to_s
     end
 
-    response
+    return response
   end
 
   def send_message(message)
@@ -37,12 +38,12 @@ class Recipient
       },
       headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     )
-
+    sleep(0.5)
     unless response.code == 200 && response.parsed_response['ok']
       raise SlackApiError, "Error when posting #{message} to #{name}, error: #{response.parsed_response['error']}"
     end
 
-    true
+    return true
   end
 
   # These are just template methods to be implemented in User and Channel

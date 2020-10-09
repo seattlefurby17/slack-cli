@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'recipient'
 require_relative 'channel'
 require_relative 'user'
@@ -25,10 +26,10 @@ class Workspace
       raise ArgumentError, 'Invalid search criteria'
     end
 
-      return nil unless channel
+    return nil unless channel
 
-      @selected = channel
-      return channel
+    @selected = channel
+    return channel
   end
 
 
@@ -41,10 +42,10 @@ class Workspace
       raise ArgumentError, 'Invalid search criteria'
     end
 
-      return nil unless user
+    return nil unless user
 
-      @selected = user
-      return user
+    @selected = user
+    return user
 
   end
 

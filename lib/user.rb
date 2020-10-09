@@ -9,7 +9,9 @@ class User < Recipient
   end
 
   def get_details
-    return "Slack ID: #{slack_id}\n" + "Name: #{name}\n" + "Real Name: #{real_name}\n" + "Status Text: #{status_text}\n" + "Status Emoji: #{status_emoji}"
+    return  "Slack ID: #{slack_id}\n" + "Name: #{name}\n"\
+            "Real Name: #{real_name}\n" + "Status Text: #{status_text}\n"\
+            "Status Emoji: #{status_emoji}"
   end
 
   def self.list_all

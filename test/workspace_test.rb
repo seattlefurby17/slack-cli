@@ -103,9 +103,9 @@ describe 'Workspace class' do
     it 'will raise an error if selected channel is invalid' do
       VCR.use_cassette('slack_send_message') do
           @workspace = Workspace.new
-        invalid_channel = Channel.new(slack_id: '777', name: 'burger', topic: 'more burger', member_count: 1)
-     
-        expect { invalid_channel.send_message('Invalid channel') }.must_raise SlackApiError
+          invalid_channel = Channel.new(slack_id: '777', name: 'burger', topic: 'more burger', member_count: 1)
+
+          expect { invalid_channel.send_message('Invalid channel') }.must_raise SlackApiError
         end
     end
 

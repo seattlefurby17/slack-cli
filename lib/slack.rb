@@ -14,7 +14,7 @@ def get_command
   puts '6 = send message'
   puts '7 = quit/q'
   command = gets.chomp.downcase
-  command
+  return command
 end
 
 def get_object_type
@@ -32,6 +32,21 @@ def get_object_type
       puts 'Please enter a valid choice!'
       command = gets.chomp.downcase
     end
+  end
+end
+
+def message_sent(workspace)
+  if workspace.selected
+    puts 'What is your message?'
+    message = gets.chomp
+    begin
+      success = workspace.selected.send_message(message)
+    rescue SlackApiError => exception
+      put "Messages can not be send, #{exception.message}"
+    end
+    puts "Message \"#{message}\" was sent to #{workspace.selected.name}!" if success
+  else
+    puts 'Please select a user or channel first'
   end
 end
 
@@ -55,7 +70,7 @@ def main
       puts "Enter the #{type}:"
       input = gets.chomp
       if workspace.select_user(input, type)
-        puts 'User selected!'
+        puts "User #{workspace.selected.name} selected!"
       else
         puts 'User not found! Please try again.'
       end
@@ -65,7 +80,7 @@ def main
       puts "Enter the #{type}:"
       input = gets.chomp
       if workspace.select_channel(input, type)
-        puts 'Channel selected!'
+        puts "Channel #{workspace.selected.name} selected!"
       else
         puts 'Channel not found! Please try again.'
       end
@@ -77,19 +92,7 @@ def main
         puts 'No user/channel selected. Select one and try again'
       end
     when '6', 'send message'
-      if workspace.selected
-        puts 'What is your message?'
-        message = gets.chomp
-        begin
-          success = workspace.selected.send_message(message)
-          rescue SlackApiError => exception
-            put "Messages can not be send, #{exception.message}"
-        end
-        puts "Message \"#{message}\" sent!" if success
-      else
-        puts 'Please select a user or channel first'
-      end
-
+      message_sent(workspace)
     else
       puts 'Please only select the commands from the list'
     end
