@@ -16,7 +16,7 @@ class User < Recipient
     url = 'https://slack.com/api/users.list'
     params = { token: ENV['SLACK_TOKEN'] }
     begin
-      response = Channel.get(url, params)
+      response = User.get(url, params)
     rescue SlackApiError => exception
       puts "Unsuccessful request, #{exception.message}. Please try again"
       exit

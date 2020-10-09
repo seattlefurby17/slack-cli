@@ -6,3 +6,4 @@
 # This is how you add .env to .gitignore
 .env
 .idea
+command-query
