@@ -66,11 +66,11 @@ describe 'Workspace class' do
   end
   describe 'send_message method' do
     it 'can send a message to a channel by name' do
-      VCR.use_cassette('slack_workspace') do
+      VCR.use_cassette('slack_send_message') do
         @workspace = Workspace.new
-      end
       @workspace.select_channel('test-channel2', 'name')
       expect @workspace.send_message('I shot first').must_equal true
+      end
     end
   end
 end
