@@ -33,16 +33,16 @@ class Recipient
       body: {
         token: API_KEY,
         text: message,
-        channel: self.name
+        channel: slack_id
       },
       headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     )
 
     unless response.code == 200 && response.parsed_response['ok']
-      raise SlackApiError, "Error when posting #{message} to #{self.name}, error: #{response.parsed_response['error']}"
+      raise SlackApiError, "Error when posting #{message} to #{name}, error: #{response.parsed_response['error']}"
     end
 
-    return true
+    true
   end
 
   # These are just template methods to be implemented in User and Channel

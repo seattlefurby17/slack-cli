@@ -64,4 +64,5 @@ describe 'Workspace class' do
       expect { @workspace.select_user('test', 'abc') }.must_raise ArgumentError
     end
   end
+  
 end

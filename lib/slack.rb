@@ -78,9 +78,16 @@ def main
       end
     when '6', 'send message'
       if workspace.selected
-        puts 'What is  your message?'
+        puts 'What is your message?'
         message = gets.chomp
-        workspace.selected.send_message(message)
+        begin
+          success = workspace.selected.send_message(message)
+          rescue SlackApiError => exception
+            put "Messages can not be send, #{exception.message}"
+        end
+        puts "Message \"#{message}\" sent!" if success
+      else
+        puts "Please select a user or channel first"
       end
 
     else
