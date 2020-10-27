@@ -42,7 +42,7 @@ def message_sent(workspace)
     begin
       success = workspace.selected.send_message(message)
     rescue SlackApiError => exception
-      put "Messages can not be send, #{exception.message}"
+      puts "Messages can not be send, #{exception.message}"
     end
     puts "Message \"#{message}\" was sent to #{workspace.selected.name}!" if success
   else

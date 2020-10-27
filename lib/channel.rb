@@ -13,7 +13,7 @@ class Channel < Recipient
   end
 
   def self.list_all
-    url = "https://slack.com/api/conversations.list"
+    url = 'https://slack.com/api/conversations.list'
     params = { token: ENV['SLACK_TOKEN'] }
     response = Channel.get(url, params)
     channel_list = []

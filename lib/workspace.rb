@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'recipient'
+# require_relative 'recipient', not neccessary because this in channel and user
 require_relative 'channel'
 require_relative 'user'
 
